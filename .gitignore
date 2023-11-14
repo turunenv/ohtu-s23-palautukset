@@ -2,4 +2,4 @@ htmlcov
 .coverage
 .pytest_cache/
 __pycache__
-*.code_workspace
+*.code-workspace
