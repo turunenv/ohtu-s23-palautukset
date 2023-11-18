@@ -1,5 +1,6 @@
 *** Settings ***
 Resource  resource.robot
+Resource  login_resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
 Test Setup  Create User And Go To Register Page
@@ -34,20 +35,32 @@ Register With Nonmatching Password And Password Confirmation
     Submit Credentials
     Register Should Fail With Message  Password and password confirmation did not match
 
+Login After Successful Registration
+    Set Username  ville
+    Set Password  ville123
+    Set Password Confirmation  ville123
+    Submit Credentials
+    Register Should Succeed
+    Go To Login Page
+    Set Credentials And Login  ville  ville123
+    Login Should Succeed
+
+
+Login After Failed Registration
+    Set Username  allu
+    Set Password  allu11
+    Set Password Confirmation  allu11
+    Submit Credentials
+    Register Should Fail With Message  Password should be at least 8 characters and not only letters
+    Go To Login Page
+    Set Credentials And Login  allu  allu11
+    Login Should Fail With Message  Invalid username or password
 
 *** Keywords ***
 Create User And Go To Register Page
     Create User   kalle  kalle123
     Go To Register Page
     Register Page Should Be Open
-
-Set Username
-    [Arguments]  ${username}
-    Input Text  username  ${username}
-
-Set Password
-    [Arguments]  ${password}
-    Input Password  password  ${password}
 
 Set Password Confirmation
     [Arguments]  ${password}
