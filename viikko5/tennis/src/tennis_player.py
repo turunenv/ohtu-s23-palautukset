@@ -6,6 +6,4 @@ class TennisPlayer:
     def increment_points(self):
         self.points += 1
 
-    def calculate_points_diff(self, player2):
-        return abs(self.points, player2.points)
     
