@@ -1,8 +1,12 @@
-class SyoteKomento:
-    def __init__(self, lue_syote, sovellus):
-        self.lue_syote = lue_syote
+class Komento:
+    def __init__(self, sovellus, ):
         self.sovellus = sovellus
-
+        
+class SyoteKomento(Komento):
+    def __init__(self, lue_syote, sovellus, ):
+        super().__init__(sovellus, )
+        self.lue_syote = lue_syote
+    
     @property
     def syote(self):
         try:
@@ -28,18 +32,20 @@ class Erotus(SyoteKomento):
         if self.syote:
             self.sovellus.miinus(self.syote)
 
-class Nollaus:
-    def __init__(self, sovellus):
-        self.sovellus = sovellus
+class Nollaus(Komento):
+    def __init__(self, sovellus, ):
+        super().__init__(sovellus)
     def suorita(self):
         self.sovellus.nollaa()
 
-class Kumoa():
+
+class Kumoa:
     def __init__(self, sovellus):
         self.sovellus = sovellus
+        
     def suorita(self):
-        return
-
+        self.sovellus.aseta_edellinen_arvo()
+        
 class Tuntematon:
     def suorita(self):
         return
